@@ -32,7 +32,7 @@ labels_train = labels_train[:len(labels_train)/100]
 from sklearn.svm import SVC
 
 # Create with linear kernel
-clf = SVC(kernel="linear")
+clf = SVC(kernel="rbf")
 
 # Train
 t0 = time()

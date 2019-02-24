@@ -43,12 +43,13 @@ print "training time:", round(time()-t0, 3), "s"
 t0 = time()
 pred = clf.predict(features_test)
 print "prediction time:", round(time()-t0, 3), "s"
-ten = pred[10]
-print(ten)
-twentysix = pred[26]
-print(twentysix)
-fidy = pred[50]
-print(fidy)
+
+# Number of test emails from Chris
+chris_test_emails = 0
+for author in pred:
+    if author == 1:
+        chris_test_emails += 1
+print chris_test_emails, "test emails were authored by Chris."
 
 # Score
 score = clf.score(features_test, labels_test)

@@ -39,3 +39,12 @@ clf.fit(features_train, labels_train)
 
 # Predict
 pred = clf.predict(features_test)
+
+# Score
+score = clf.score(features_test, labels_test)
+print "score:", score
+
+# Accuracy
+from sklearn.metrics import accuracy_score
+acc = accuracy_score(pred, labels_test)
+print "accuracy:", acc

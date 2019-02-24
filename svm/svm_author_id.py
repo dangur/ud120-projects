@@ -24,7 +24,18 @@ features_train, features_test, labels_train, labels_test = preprocess()
 
 #########################################################
 ### your code goes here ###
-
+# Import, create, train and make predictions with the sklearn SVC classifier.
+# When creating the classifier, use a linear kernel.
 #########################################################
 
+# Import
+from sklearn.svm import SVC
 
+# Create with linear kernel
+clf = SVC(kernel="linear")
+
+# Train
+clf.fit(features_train, labels_train)
+
+# Predict
+pred = clf.predict(features_test)

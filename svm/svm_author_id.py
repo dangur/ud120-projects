@@ -35,10 +35,14 @@ from sklearn.svm import SVC
 clf = SVC(kernel="linear")
 
 # Train
+t0 = time()
 clf.fit(features_train, labels_train)
+print "training time:", round(time()-t0, 3), "s"
 
 # Predict
+t0 = time()
 pred = clf.predict(features_test)
+print "prediction time:", round(time()-t0, 3), "s"
 
 # Score
 score = clf.score(features_test, labels_test)

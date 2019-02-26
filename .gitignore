@@ -9,3 +9,5 @@ my_classifier.pkl
 my_dataset.pkl
 my_feature_list.pkl
 .idea*
+enron_mail_20150507.tar.gz
+ud120-projects.iml

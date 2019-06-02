@@ -13,11 +13,10 @@ import matplotlib.pyplot as plt
 import sys
 sys.path.append("../tools/")
 from feature_format import featureFormat, targetFeatureSplit
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import MinMaxScaler
 
-
-
-
-def Draw(pred, features, poi, mark_poi=False, name="image.png", f1_name="feature 1", f2_name="feature 2"):
+def Draw(pred, features, poi, mark_poi=False, name="image.png", f1_name="feature 1", f2_name="feature 2", f3_name="feature 3"):
     """ some plotting code designed to help you visualize your clusters """
 
     ### plot each cluster with a different color--add more colors for
@@ -48,25 +47,38 @@ data_dict.pop("TOTAL", 0)
 ### can be any key in the person-level dictionary (salary, director_fees, etc.) 
 feature_1 = "salary"
 feature_2 = "exercised_stock_options"
-poi  = "poi"
+feature_3 = "total_payments"
+poi = "poi"
 features_list = [poi, feature_1, feature_2]
 data = featureFormat(data_dict, features_list )
 poi, finance_features = targetFeatureSplit( data )
+finance_features.append([200000., 1000000])
+print(finance_features)
 
-
+scaler = MinMaxScaler()
+finance_features = scaler.fit_transform(finance_features)
+print(finance_features)
 ### in the "clustering with 3 features" part of the mini-project,
 ### you'll want to change this line to 
 ### for f1, f2, _ in finance_features:
 ### (as it's currently written, the line below assumes 2 features)
+minimum = 9999999
+maximum = 1
 for f1, f2 in finance_features:
     plt.scatter( f1, f2 )
+    if f1 > 0:
+        if f1 < minimum:
+            minimum = f1
+        elif f1 > maximum:
+            maximum = f1
+print minimum
+print maximum
 plt.show()
 
 ### cluster here; create predictions of the cluster labels
 ### for the data and store them to a list called pred
-
-
-
+kmeans = KMeans(2)
+pred = kmeans.fit_predict(finance_features)
 
 ### rename the "name" parameter when you change the number of features
 ### so that the figure gets saved to a different file

@@ -39,5 +39,7 @@ labels_train   = labels_train[:150]
 
 ### your code goes here
 
-
-
+# from sklearn import metrics
+#
+# accuracy = metrics.accuracy_score(labels_train, labels_test)
+# print accuracy

@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import pickle
 
 from outlier_cleaner import outlierCleaner
-
+from sklearn.linear_model import LinearRegression
 
 ### load up some practice data with outliers in it
 ages = pickle.load( open("practice_outliers_ages.pkl", "r") )
@@ -27,11 +27,11 @@ ages_train, ages_test, net_worths_train, net_worths_test = train_test_split(ages
 ### the plotting code below works, and you can see what your regression looks like
 
 
-
-
-
-
-
+reg = LinearRegression().fit(ages_train, net_worths_train)
+slope = reg.coef_
+print (slope)
+score = reg.score(ages_test, net_worths_test)
+print score
 
 
 
@@ -47,7 +47,9 @@ plt.show()
 ### identify and remove the most outlier-y points
 cleaned_data = []
 try:
+    print 'is anybody there?'
     predictions = reg.predict(ages_train)
+    print 'hello'
     cleaned_data = outlierCleaner( predictions, ages_train, net_worths_train )
 except NameError:
     print "your regression object doesn't exist, or isn't name reg"
@@ -58,7 +60,7 @@ except NameError:
 
 
 
-
+print('i am running')
 ### only run this code if cleaned_data is returning data
 if len(cleaned_data) > 0:
     ages, net_worths, errors = zip(*cleaned_data)
@@ -82,3 +84,6 @@ if len(cleaned_data) > 0:
 else:
     print "outlierCleaner() is returning an empty list, no refitting to be done"
 
+print (reg.coef_)
+score = reg.score(ages_test, net_worths_test)
+print (score)
